@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Get By Id {{id}}</title>
+</head>
+<body>
+	<ul>
+        {% for img in data %}
+            <li><img src="{{url_for('static', filename='')}}{{ img }}">{{img}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -30,6 +30,10 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{url_for('static', filename='assets/css/ath.css')}}" rel="stylesheet" />
+
+    <!--Jquery ContextMenu CSS-->
+    <link href="{{url_for('static', filename='assets/css/jquery.contextMenu.min.css')}}" rel="stylesheet" />
+
 </head>
 
 <body class="theme-red">
@@ -826,10 +830,10 @@
                             <div id="aniimated-thumbnials" class="list-unstyled row clearfix">
                                 {% for result in data %}
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                        <a href="{{url_for('static', filename='assets/images/pariwisata/')}}{{result[1]}}" data-sub-html="{{result[0]}}">
-                                            <img class="img-responsive thumbnail" src="{{url_for('static', filename='assets/images/pariwisata/')}}{{result[1]}}">
+                                        <a href="{{url_for('static', filename='assets/images/pariwisata/')}}{{result.image_fname}}" data-sub-html="{{result.tweet}}">
+                                            <img class="img-responsive thumbnail" src="{{url_for('static', filename='assets/images/pariwisata/')}}{{result.image_fname}}">
                                         </a>
-                                        {{result[0]}}
+                                        <input type="button" class="btn btn-default waves-effect" onclick='location.href="{{url_for('get_similar_images', id=result.id)}}"' value="Search for similar images"></input>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -864,6 +868,33 @@
 
     <!-- Demo Js -->
     <script src="{{url_for('static', filename='assets/js/demo.js')}}"></script>
+
+    <!-- Context Menu Js -->
+    <script src="{{url_for('static', filename='assets/js/jquery.ui.position.min.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/js/jquery.contextMenu.min.js')}}"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $.contextMenu({
+                selector: '.context-menu-one', 
+                callback: function(key, options) {
+                    var m = "clicked: " + key;
+                    window.console && console.log(m) || alert(m); 
+                },
+                items: {
+                    "edit": {name: "Edit"},
+                    "cut": {name: "Cut"},
+                    "copy": {name: "Copy"},
+                    "paste": {name: "Paste"},
+                    "delete": {name: "Delete"},
+                }
+            });
+
+            $('.context-menu-one').on('click', function(e){
+                console.log('clicked', this);
+            })    
+        });
+    </script>
 </body>
 
 </html>

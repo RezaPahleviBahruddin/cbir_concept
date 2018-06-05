@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Text Prepocessing</title>
+</head>
+<body>
+	
+	<h1>Berikut merupakan hasil dari Text Prepocessing</h1>
+	{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <b>Error is found</b>
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message[1] }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+	<form action="" method="post">
+		{{ form.csrf }}
+
+		<div class="input text">
+			{{ form.query.label }} {{ form.query }}
+		</div>
+
+		<div class="input submit">
+			<input type="submit" value="Submit" />
+		</div>
+	</form>
+
+    {% if query %}
+	    <ol>
+	        {% for row in data %}
+	            <li>{{ row.tweet }}</li>
+	        {% endfor %}
+        </ol>
+	{% endif %}
+
+</body>
+</html>
